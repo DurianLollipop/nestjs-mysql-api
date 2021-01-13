@@ -61,6 +61,16 @@ export class AccessDto {
   readonly description?: string;
 
   @ApiPropertyOptional({
+    description: '是否缓存页面',
+    enum: [0, 1],
+  })
+  @IsEnum({ 否: 0, 是: 1 }, { message: '必须是0或者1' })
+  @IsNumber()
+  @Transform(value => parseInt(value, 10))
+  @IsOptional()
+  readonly keepAlive?: number;
+
+  @ApiPropertyOptional({
     required: false,
     description: '状态',
     enum: [0, 1],

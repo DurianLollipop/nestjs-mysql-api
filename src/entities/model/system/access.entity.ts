@@ -57,6 +57,14 @@ export class AccessEntity extends PublicEntity {
 	})
 	sort: number;
 
+	@Column('int', {
+		nullable: false,
+		default: () => 1,
+		name: 'keepAlive',
+		comment: '是否缓存页面'
+	})
+	keepAlive: number;
+
 
 	@Column('varchar', {
 		nullable: true,

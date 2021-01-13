@@ -19,8 +19,8 @@ export class MenusService {
    * @Date: 2020-05-19 08:40:14
    * @LastEditors: 水痕
    * @Description: 根据当前用户的角色获取菜单
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async menusList(userInfo: ObjectType): Promise<any> {
     try {
@@ -38,12 +38,13 @@ export class MenusService {
         .where('access.isDel=0')
         .getMany();
       const formatMenus = resultList.map(item => {
-        const { id, moduleName, actionName, moduleId, url, sort, icon } = item;
+        const { id, moduleName, actionName, moduleId, url, keepAlive, sort, icon } = item;
         return {
           id,
           url,
           sort,
           icon,
+          keepAlive,
           parentId: moduleId,
           name: moduleName ? moduleName : actionName,
         }
@@ -71,4 +72,4 @@ export class MenusService {
       throw new HttpException('获取菜单失败', HttpStatus.OK);
     }
   }
-} 
+}

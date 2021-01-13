@@ -20,6 +20,8 @@ const bodyParser = require('body-parser');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 require('body-parser-xml')(bodyParser);
 
+console.log(process.env.NODE_ENV, '有啥')
+
 const PORT = process.env.PORT || 8888;
 const PREFIX = process.env.PREFIX || '';
 declare const module: any;
