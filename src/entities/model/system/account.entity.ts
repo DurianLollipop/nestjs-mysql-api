@@ -1,17 +1,17 @@
 import { Column, Entity, BeforeInsert } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import * as jwt from 'jsonwebtoken';
-import NodeAuth from 'node-auth0';
+import SimpNodeAuth from 'simp-node-auth';
 import { ObjectType } from '@src/types';
 import { PublicEntity } from '../public.entity';
 
 @Entity('account')
 export class AccountEntity extends PublicEntity {
 	@Exclude()
-	private nodeAuth: NodeAuth;
+	private nodeAuth: SimpNodeAuth;
 	constructor () {
 		super()
-		this.nodeAuth = new NodeAuth();
+		this.nodeAuth = new SimpNodeAuth();
 	}
 
 	@Column('varchar', {
@@ -51,8 +51,8 @@ export class AccountEntity extends PublicEntity {
    * @Date: 2020-01-23 09:02:59
    * @LastEditors: 水痕
    * @Description: 插件数据库前先给密码加密
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
 	@BeforeInsert()
 	makePassword() {
@@ -64,8 +64,8 @@ export class AccountEntity extends PublicEntity {
    * @Date: 2020-01-23 09:03:45
    * @LastEditors: 水痕
    * @Description: 检查密码是否正确
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
 	checkPassword(password: string, sqlPassword: string) {
 		return this.nodeAuth.checkPassword(password, sqlPassword);
@@ -75,8 +75,8 @@ export class AccountEntity extends PublicEntity {
 		 * @Date: 2020-01-23 09:04:38
 		 * @LastEditors: 水痕
 		 * @Description: 生产token签名
-		 * @param {type} 
-		 * @return: 
+		 * @param {type}
+		 * @return:
 		 */
 	@Expose()
 	private get token() {
@@ -100,8 +100,8 @@ export class AccountEntity extends PublicEntity {
    * @Date: 2020-01-23 09:19:49
    * @LastEditors: 水痕
    * @Description: 定义返回数据,用了这个函数后上面的Exclude和Expose就失效了
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
 	public toResponseObject(isShowToken = true): object {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars

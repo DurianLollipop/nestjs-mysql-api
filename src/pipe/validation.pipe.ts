@@ -3,11 +3,11 @@
  * @Author: 水痕
  * @Github: https://github.com/kuangshp
  * @Email: 332904234@qq.com
- * @Company: 
+ * @Company:
  * @Date: 2020-01-09 09:31:18
  * @LastEditors: 水痕
- * @LastEditTime: 2020-07-27 09:24:02
- * @FilePath: /dancebox-server-mysql-api/src/pipe/validation.pipe.ts
+ * @LastEditTime: 2021-01-09 11:08:05
+ * @FilePath: /nestjs-mysql-api/src/pipe/validation.pipe.ts
  */
 import {
   ArgumentMetadata,
@@ -19,7 +19,6 @@ import {
 } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
-import * as _ from 'lodash';
 
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {

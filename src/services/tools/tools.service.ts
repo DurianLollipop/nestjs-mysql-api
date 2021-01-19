@@ -1,22 +1,22 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import NodeAuth from 'node-auth0';
+import SimpNodeAuth from 'simp-node-auth';
 
 import * as uuidv4 from 'uuid';
 import { isUUID, isEmail, isInt, isMobilePhone } from 'class-validator';
 
 @Injectable()
 export class ToolsService {
-  private nodeAuth: NodeAuth;
+  private simpNodeAuth: SimpNodeAuth;
   constructor () {
-    this.nodeAuth = new NodeAuth();
+    this.simpNodeAuth = new SimpNodeAuth();
   }
   /**
    * @Author: 水痕
    * @Date: 2020-01-22 19:48:54
    * @LastEditors: 水痕
    * @Description: 生成uuid的方法
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   public get uuid(): string {
     return uuidv4.v4();
@@ -27,11 +27,11 @@ export class ToolsService {
    * @Date: 2020-01-09 10:09:36
    * @LastEditors: 水痕
    * @Description: 密码加密的方法
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   makePassword(password: string): string {
-    return this.nodeAuth.makePassword(password);
+    return this.simpNodeAuth.makePassword(password);
   }
 
   /**
@@ -39,11 +39,11 @@ export class ToolsService {
    * @Date: 2020-01-09 10:09:44
    * @LastEditors: 水痕
    * @Description: 校验密码加密
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   checkPassword(password: string, sqlPassword: string): boolean {
-    return this.nodeAuth.checkPassword(password, sqlPassword);
+    return this.simpNodeAuth.checkPassword(password, sqlPassword);
   }
 
 
@@ -52,8 +52,8 @@ export class ToolsService {
    * @Date: 2020-01-25 21:56:18
    * @LastEditors: 水痕
    * @Description: 判断是否为uuid
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   public isUUID(id: string): boolean {
     return isUUID(id);
@@ -64,8 +64,8 @@ export class ToolsService {
    * @Date: 2020-01-25 21:56:55
    * @LastEditors: 水痕
    * @Description: 判断是否为id
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   public isInt(id: string): boolean {
     return isInt(Number(id));
@@ -84,8 +84,8 @@ export class ToolsService {
    * @Date: 2020-04-18 13:30:46
    * @LastEditors: 水痕
    * @Description: 校验分页
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   public checkPage(pageSize: number, pageNumber: number): void {
     if (!isInt(Number(pageSize)) || !isInt(Number(pageNumber))) {
@@ -98,8 +98,8 @@ export class ToolsService {
    * @Date: 2020-05-18 13:14:48
    * @LastEditors: 水痕
    * @Description: 根据id查询单条数据
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   public async findByIdOrUuid(id: string, repository: any) {
     if (this.isUUID(id)) {

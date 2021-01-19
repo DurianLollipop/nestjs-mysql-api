@@ -182,7 +182,7 @@ export class AccountService {
    * @return:
    */
   async findById(id: number): Promise<any> {
-    const account = await getConnection().createQueryBuilder(AccountEntity, 'account')
+    const account = await await getConnection().createQueryBuilder(AccountEntity, 'account')
       .andWhere('(account.id= :id and account.isDel=0)', { id })
       .leftJoin(AccountRoleEntity, 'account_role', 'account.id=account_role.accountId') // 中间表
       .leftJoinAndMapMany('user.role', RoleEntity, 'role', 'account_role.role_id=role.id')
@@ -237,7 +237,7 @@ export class AccountService {
     return {
       data: data.map((item: ObjectType) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { password, mobile, email, username, nodeAuth, ...others } = item;
+        const { password, mobile, email, username, simpNodeAuth, ...others } = item;
         return Object.assign(others, {
           mobile: this.toolsService.isUUID(mobile) ? '' : mobile,
           email: this.toolsService.isUUID(email) ? '' : email,
