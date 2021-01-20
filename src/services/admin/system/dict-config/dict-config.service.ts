@@ -19,8 +19,8 @@ export class DictConfigService {
    * @Date: 2020-07-22 20:57:11
    * @LastEditors: 水痕
    * @Description: 添加数据
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async createDistConfig(createDistConfigDto: CreateDistConfigDto): Promise<DictConfigEntry> {
     try {
@@ -38,8 +38,8 @@ export class DictConfigService {
    * @Date: 2020-07-22 21:00:53
    * @LastEditors: 水痕
    * @Description: 根据id删除数据
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async deleteById(id: number): Promise<string> {
     const { raw: { affectedRows } } = await this.dictConfigRepository.update({ id }, { isDel: 1 });
@@ -55,8 +55,8 @@ export class DictConfigService {
    * @Date: 2020-07-22 21:04:27
    * @LastEditors: 水痕
    * @Description: 根据id修改配置项
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async updateById(id: number, updateDistConfigDto: UpdateDistConfigDto): Promise<string> {
     const { raw: { affectedRows } } = await this.dictConfigRepository.update({ id }, updateDistConfigDto);
@@ -72,8 +72,8 @@ export class DictConfigService {
    * @Date: 2020-07-22 21:08:16
    * @LastEditors: 水痕
    * @Description: 分页查询数据
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async findPage(queryOption: ObjectType): Promise<any> {
     const { pageSize = 10, pageNumber = 1, ...others } = queryOption || {};
@@ -84,7 +84,6 @@ export class DictConfigService {
         createdAt: 'DESC',
       },
       where: fileObjectField({
-        ...others,
         isDel: 0,
       })
     });
@@ -101,8 +100,8 @@ export class DictConfigService {
    * @Date: 2020-07-22 21:13:48
    * @LastEditors: 水痕
    * @Description: 根据分类查询字典
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async findByCategory(category: string | string[]): Promise<any> {
     let categoryList = [];
