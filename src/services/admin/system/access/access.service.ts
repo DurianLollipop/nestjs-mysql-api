@@ -19,8 +19,8 @@ export class AccessService {
    * @Date: 2020-05-19 08:07:18
    * @LastEditors: 水痕
    * @Description: 创建资源
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async createAccess(createAccessDto: CreateAccessDto): Promise<any> {
     try {
@@ -49,8 +49,8 @@ export class AccessService {
    * @Date: 2020-05-19 08:10:59
    * @LastEditors: 水痕
    * @Description: 根据id删除资源
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async deleteById(id: number): Promise<any> {
     // 判断如果有子节点的时候就不能删除
@@ -71,10 +71,13 @@ export class AccessService {
    * @Date: 2020-05-19 08:14:34
    * @LastEditors: 水痕
    * @Description: 根据id更改资源
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async updateById(id: number, data: UpdateAccessDto): Promise<any> {
+    if (id < 6) {
+      throw new HttpException('系统预置菜单，不允许修改。', HttpStatus.OK);
+    }
     const { raw: { affectedRows } } = await this.accessRepository.update({ id }, data);
     if (affectedRows) {
       return '修改成功';
@@ -88,8 +91,8 @@ export class AccessService {
    * @Date: 2020-05-19 08:20:33
    * @LastEditors: 水痕
    * @Description: 根据类型获取全部的模块
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async moduleList(): Promise<any> {
     return await this.accessRepository.find({ where: { moduleId: -1, isDel: 0 }, select: ['moduleName', 'id'] });
@@ -100,8 +103,8 @@ export class AccessService {
    * @Date: 2020-05-19 08:23:05
    * @LastEditors: 水痕
    * @Description: 分页查找全部的资源
-   * @param {type} 
-   * @return: 
+   * @param {type}
+   * @return:
    */
   async accessList(queryOption: ObjectType): Promise<any> {
     const { pageSize = 10, pageNumber = 1, type = 1, id = -1 } = queryOption;

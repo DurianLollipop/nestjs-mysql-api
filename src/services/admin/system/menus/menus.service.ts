@@ -38,13 +38,14 @@ export class MenusService {
         .where('access.isDel=0')
         .getMany();
       const formatMenus = resultList.map(item => {
-        const { id, moduleName, actionName, moduleId, url, keepAlive, sort, icon } = item;
+        const { id, moduleName, actionName, moduleId, url, keepAlive, viewPath, sort, icon } = item;
         return {
           id,
           url,
           sort,
           icon,
           keepAlive,
+          viewPath,
           parentId: moduleId,
           name: moduleName ? moduleName : actionName,
         }

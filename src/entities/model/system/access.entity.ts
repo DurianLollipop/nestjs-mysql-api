@@ -39,6 +39,14 @@ export class AccessEntity extends PublicEntity {
 	})
 	url: string | null;
 
+	@Column('varchar', {
+		nullable: true,
+		length: 300,
+		name: 'viewPath',
+		comment: '文件地址'
+	})
+	viewPath: string | null;
+
 
 	@Column('int', {
 		nullable: false,
